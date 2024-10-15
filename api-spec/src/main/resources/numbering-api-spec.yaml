@@ -1,0 +1,113 @@
+openapi: 3.0.0
+info:
+  title: Numbering API
+  version: 1.0.0
+  description: API for generating unique numbers for registered users
+
+paths:
+  /api/numbering/configuration:
+    get:
+      summary: Get the current configuration
+      tags:
+        - configuration
+      operationId: getCurrentConfiguration
+      responses:
+        '200':
+          description: Current configurations
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/NumberingConfigurationDto"
+        '400':
+          description: Bad request
+        '500':
+          description: Internal server error
+    post:
+      summary: Configure numbering criteria
+      tags:
+        - configuration
+      operationId: configureNumbering
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NumberingConfigurationDto'
+      responses:
+        '200':
+          description: Configuration updated
+        '400':
+          description: Invalid input data
+        '500':
+          description: Internal server error
+  /api/numbering/generate:
+    post:
+      summary: Generate unique number for a registered user
+      tags:
+        - numbering
+      operationId: generateUniqueNumber
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RegisteredDto'
+      responses:
+        '200':
+          description: Generated number
+          content:
+            application/json:
+              schema:
+                type: string
+        '400':
+          description: Invalid input data
+        '404':
+          description: Configuration not found
+        '500':
+          description: Internal server error
+
+components:
+  schemas:
+    RegisteredDto:
+      type: object
+      properties:
+        firstName:
+          type: string
+        lastName:
+          type: string
+        birthDate:
+          type: string
+          format: date
+    NumberingConfigurationDto:
+      type: object
+      properties:
+        counter:
+          type: integer
+          format: int64
+        currentCounter:
+          type: integer
+          format: int64
+        criteriaConfigurations:
+          type: array
+          items:
+            $ref: "#/components/schemas/CriterionConfigurationDto"
+    CriterionTypeDto:
+      type: string
+      enum:
+        - LAST_NAME
+        - FIRST_NAME
+        - BIRTH_YEAR
+        - COUNTER
+    CriterionConfigurationDto:
+      type: object
+      properties:
+        order:
+          type: integer
+        type:
+          $ref: '#/components/schemas/CriterionTypeDto'
+        prefix:
+          type: string
+        suffix:
+          type: string
+        length:
+          type: integer

@@ -1,0 +1,76 @@
+<div class="bg-white shadow sm:rounded-lg">
+    <div class="px-4 py-5 sm:p-6">
+        <h3 class="text-lg leading-6 font-medium text-gray-900">Numbering Configuration</h3>
+
+        <div *ngIf="errorMessage" class="mt-2 text-sm text-red-600">
+            {{ errorMessage }}
+        </div>
+
+        <div class="mt-5">
+            <form [formGroup]="configForm" (ngSubmit)="onSubmit()" class="space-y-6">
+                <div>
+                    <label for="counter" class="block text-sm font-medium text-gray-700">Initial Counter</label>
+                    <input type="number" id="counter" formControlName="counter"
+                           class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                </div>
+
+                <div formArrayName="criteriaConfigurations" class="space-y-4">
+                    <h4 class="text-md font-medium text-gray-900">Criteria Configurations</h4>
+                    <ng-container *ngFor="let criterion of criteriaConfigurations.controls; let i = index">
+                        <div [formGroupName]="i" class="bg-gray-50 p-4 rounded-md">
+                            <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700">Order</label>
+                                    <input type="number" formControlName="order"
+                                           class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700">Type</label>
+                                    <select formControlName="type"
+                                            class="mt-1 block w-full bg-white border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                                        <option value="LAST_NAME">Last Name</option>
+                                        <option value="FIRST_NAME">First Name</option>
+                                        <option value="BIRTH_YEAR">Birth Year</option>
+                                        <option value="COUNTER">Counter</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700">Prefix</label>
+                                    <input type="text" formControlName="prefix"
+                                           class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700">Suffix</label>
+                                    <input type="text" formControlName="suffix"
+                                           class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700">Length</label>
+                                    <input type="number" formControlName="length"
+                                           class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                                </div>
+                            </div>
+                            <button type="button" (click)="removeCriterion(i)"
+                                    class="mt-2 inline-flex items-center px-2.5 py-1.5 border border-transparent text-xs font-medium rounded text-red-700 bg-red-100 hover:bg-red-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500">
+                                Remove
+                            </button>
+                        </div>
+                    </ng-container>
+                    <button type="button" (click)="addCriterion()"
+                            [disabled]="!canAddCriterion"
+                            [ngClass]="{'opacity-50 cursor-not-allowed': !canAddCriterion}"
+                            class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                        Add Criterion
+                    </button>
+                </div>
+
+                <div>
+                    <button type="submit"
+                            class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                        Save Configuration
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

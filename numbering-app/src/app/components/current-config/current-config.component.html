@@ -1,0 +1,21 @@
+<div *ngIf="currentConfig" class="bg-blue-100 border-l-4 border-blue-500 text-blue-700 p-4 mb-4 rounded-r-md">
+  <p class="font-bold">Current Configuration</p>
+  <p class="text-sm">Counter: {{ currentConfig.counter }}</p>
+  <p class="text-sm">Criteria: {{ criteriaCount }}</p>
+  <button (click)="toggleDetails()" class="text-blue-600 hover:text-blue-800 text-sm underline mt-1">
+    {{ showDetails ? 'Hide' : 'Show' }} details
+  </button>
+  <div *ngIf="showDetails" class="mt-2">
+    <ul class="list-none text-sm space-y-2">
+      <li *ngFor="let criterion of currentConfig.criteriaConfigurations" class="bg-white p-2 rounded shadow-sm">
+        <span class="font-semibold">{{ criterion.type }}</span>
+        <ul class="list-disc list-inside ml-2 text-xs">
+          <li>Order: {{ criterion.order }}</li>
+          <li>Prefix: "{{ criterion.prefix }}"</li>
+          <li>Suffix: "{{ criterion.suffix }}"</li>
+          <li>Length: {{ criterion.length }}</li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+</div>
