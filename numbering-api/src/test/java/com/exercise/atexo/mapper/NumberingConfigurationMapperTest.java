@@ -6,6 +6,7 @@ import com.exercise.atexo.domain.NumberingConfigurationDomain;
 import com.exercise.atexo.numbering.dto.CriterionConfigurationDto;
 import com.exercise.atexo.numbering.dto.CriterionTypeDto;
 import com.exercise.atexo.numbering.dto.NumberingConfigurationDto;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
@@ -17,11 +18,13 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 class NumberingConfigurationMapperTest {
 
     @Test
+    @DisplayName("toDomain should return null when dto is null")
     void toDomain_shouldReturnNull_whenDtoIsNull() {
         assertNull(NumberingConfigurationMapper.toDomain(null));
     }
 
     @Test
+    @DisplayName("toDomain should map correctly when dto is valid")
     void toDomain_shouldMapCorrectly_whenDtoIsValid() {
         // Arrange
         NumberingConfigurationDto dto = new NumberingConfigurationDto()
@@ -55,7 +58,7 @@ class NumberingConfigurationMapperTest {
         assertThat(resultCriteria).hasSize(2);
 
         // Check first criterion
-        CriterionConfigurationDomain firstCriterion = resultCriteria.get(0);
+        CriterionConfigurationDomain firstCriterion = resultCriteria.getFirst();
         assertThat(firstCriterion.getOrder()).isEqualTo(1);
         assertThat(firstCriterion.getCriterionType()).isEqualTo(CriterionType.LAST_NAME);
         assertThat(firstCriterion.getPrefix()).isEqualTo("L");

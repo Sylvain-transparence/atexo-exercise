@@ -82,7 +82,18 @@ export class ConfigurationsComponent implements OnInit {
         }
     }
 
-    get canAddCriterion() {
+  onCounterChange(event: Event) {
+    const inputElement = event.target as HTMLInputElement;
+    let value = parseInt(inputElement.value, 10);
+
+    if (isNaN(value) || value < 0) {
+      value = 0;
+    }
+
+    this.configForm.patchValue({ counter: value });
+  }
+
+  get canAddCriterion() {
         return this.criteriaConfigurations.length < this.MAX_CRITERIA;
     }
 }

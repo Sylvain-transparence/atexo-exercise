@@ -13,6 +13,7 @@ import com.exercise.atexo.mapper.NumberingConfigurationMapper;
 import com.exercise.atexo.numbering.dto.CriterionConfigurationDto;
 import com.exercise.atexo.numbering.dto.CriterionTypeDto;
 import com.exercise.atexo.numbering.dto.NumberingConfigurationDto;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -40,6 +41,7 @@ class NumberingServiceTest {
     private NumberingService numberingService;
 
     @Test
+    @DisplayName("generate number should generate correctly Example 1")
     void generateNumber_shouldGenerateCorrectly_Example1() {
         NumberingConfigurationDto dto = new NumberingConfigurationDto()
                 .counter(10L)
@@ -73,6 +75,7 @@ class NumberingServiceTest {
     }
 
     @Test
+    @DisplayName("generate number should generate correctly Example 2")
     void generateNumber_shouldGenerateCorrectly_Example2() {
         NumberingConfigurationDto dto = new NumberingConfigurationDto()
                 .counter(7L)
@@ -112,6 +115,7 @@ class NumberingServiceTest {
     }
 
     @Test
+    @DisplayName("save configuration should save configuration correctly")
     void saveConfiguration_shouldSaveConfigurationCorrectly() {
         NumberingConfigurationDto dto = new NumberingConfigurationDto()
                 .counter(1L);
@@ -135,6 +139,7 @@ class NumberingServiceTest {
     }
 
     @Test
+    @DisplayName("generate number should throw exception when configuration is null")
     void generateNumber_shouldThrowExceptionWhenConfigurationIsNull() {
         RegisteredDomain registered = new RegisteredDomain("John", "Doe", LocalDate.of(1990, 1, 1));
 
@@ -144,6 +149,7 @@ class NumberingServiceTest {
     }
 
     @Test
+    @DisplayName("generate number should generate number correctly")
     void generateNumber_shouldGenerateNumberCorrectly() {
         // Arrange
         NumberingConfigurationDto dto = new NumberingConfigurationDto()
@@ -176,6 +182,7 @@ class NumberingServiceTest {
     }
 
     @Test
+    @DisplayName("generate number should handle multiple criteria")
     void generateNumber_shouldHandleMultipleCriteria() {
         // Arrange
         NumberingConfigurationDto dto = new NumberingConfigurationDto()
@@ -217,6 +224,7 @@ class NumberingServiceTest {
     }
 
     @Test
+    @DisplayName("generate number should increment counter correctly")
     void generateNumber_shouldIncrementCounterCorrectly() {
         // Arrange
         NumberingConfigurationDto dto = new NumberingConfigurationDto()
@@ -244,6 +252,7 @@ class NumberingServiceTest {
     }
 
     @Test
+    @DisplayName("save configuration should throw invalid configuration exception when dto is null")
     void saveConfiguration_shouldThrowInvalidConfigurationException_whenDtoIsNull() {
         assertThatThrownBy(() -> numberingService.saveConfiguration(null))
                 .isInstanceOf(InvalidConfigurationException.class)
@@ -251,6 +260,7 @@ class NumberingServiceTest {
     }
 
     @Test
+    @DisplayName("save configuration should throw invalid configuration exception when criteria is empty")
     void saveConfiguration_shouldThrowInvalidConfigurationException_whenCriteriaIsEmpty() {
         NumberingConfigurationDto dto = new NumberingConfigurationDto()
                 .counter(1L)
@@ -262,6 +272,7 @@ class NumberingServiceTest {
     }
 
     @Test
+    @DisplayName("generate number should throw number generation exception when strategy fails")
     void generateNumber_shouldThrowNumberGenerationException_whenStrategyFails() {
         NumberingConfigurationDto dto = new NumberingConfigurationDto()
                 .counter(1L)

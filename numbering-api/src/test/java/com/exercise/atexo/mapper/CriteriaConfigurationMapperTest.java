@@ -63,8 +63,8 @@ class CriteriaConfigurationMapperTest {
     }
 
     @Test
-    @DisplayName("toDomain should return null when input is null")
-    void toDomainShouldReturnNullWhenInputIsNull() {
+    @DisplayName("toDomain should return null when dto is null")
+    void toDomainShouldReturnNullWhenDtoIsNull() {
         // Act
         CriterionConfigurationDomain result = CriteriaConfigurationMapper.toDomain(null);
 
@@ -93,8 +93,8 @@ class CriteriaConfigurationMapperTest {
     }
 
     @Test
-    @DisplayName("toDto should return null when input is null")
-    void toDtoShouldReturnNullWhenInputIsNull() {
+    @DisplayName("toDto should return null when dto is null")
+    void toDtoShouldReturnNullWhenDtoIsNull() {
         // Act
         CriterionConfigurationDto result = CriteriaConfigurationMapper.toDto(null);
 
@@ -136,8 +136,8 @@ class CriteriaConfigurationMapperTest {
     }
 
     @Test
-    @DisplayName("toDtos should return null when input is null")
-    void toDtosShouldReturnNullWhenInputIsNull() {
+    @DisplayName("toDtos should return null when dto is null")
+    void toDtosShouldReturnNullWhenDtoIsNull() {
         // Act
         List<CriterionConfigurationDto> result = CriteriaConfigurationMapper.toDtos(null);
 
